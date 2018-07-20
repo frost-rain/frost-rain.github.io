@@ -1,12 +1,11 @@
 ---
 layout: post
-title: Jekyll搭建个人博客
-date: 2016-10-14
-tags: 博客   
+title: 安装buby
+description: 装了2次ruby，一次是带有Devkit的，另一种就是ruby和Devkit分开的
+tags: ruby
 ---
 
 
-####装了2次ruby，一次是带有Devkit的，另一种就是ruby和Devkit分开的####
 
 
 <img src="http://upload-images.jianshu.io/upload_images/95646-5bfd0cecf587c766.png" width="300px" height="240px" alt="简书">
