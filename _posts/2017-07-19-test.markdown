@@ -1,0 +1,24 @@
+---
+layout : post
+title : 安装ruby
+description : 我安装ruby的时候遇到太多的的坑了，多到记不住，于是写下这个，以诫后人（滑稽)
+tag : ruby 测试
+----
+
+
+
+####装了2次ruby，一次是带有Devkit的，另一种就是ruby和Devkit分开的####
+
+
+<img src="http://upload-images.jianshu.io/upload_images/95646-5bfd0cecf587c766.png" width="300px" height="240px" alt="简书">
+<html>
+<body>
+   <p><font size=10> laji </font></p>
+   </body>
+   </html>
+
+
+
+
+<p style="font-family:arial;color:red;font-size:20px;">这个是真的测试样本</p>
+<p style="color: blue; font-size:10">这个是自己的测试 </p>
