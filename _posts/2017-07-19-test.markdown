@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "安装ruby"
+title: 安装ruby
 description: "我安装ruby的时候遇到太多的的坑了，多到记不住，于是写下这个，以诫后人（滑稽)"
-tag: ruby 测试
+tag: ruby
 ----
 
 
