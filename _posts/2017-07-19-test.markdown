@@ -1,10 +1,9 @@
 ---
 layout: post
-title: 安装ruby
-description: "我安装ruby的时候遇到太多的的坑了，多到记不住，于是写下这个，以诫后人（滑稽)"
-tag: ruby
-----
-
+title: Jekyll搭建个人博客
+date: 2016-10-14
+tags: 博客   
+---
 
 
 ####装了2次ruby，一次是带有Devkit的，另一种就是ruby和Devkit分开的####
