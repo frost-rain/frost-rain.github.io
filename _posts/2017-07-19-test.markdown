@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 安装buby
+title: "安装buby"
 description: "装了2次ruby，一次是带有Devkit的，另一种就是ruby和Devkit分开的"
 tags: ruby
 ---
