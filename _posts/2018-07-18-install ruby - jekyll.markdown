@@ -54,7 +54,7 @@ $ gem sources --remove https://rubygems.org/
 - https://gems.ruby-china.com
 :ssl_verify_mode: 0
 ```
-
+<br />
 ### 2.下载集成Devkit的包，直接安装
 
 - ##### 按提示安装，最后Devkit的安装会在命令行下，选 <b style="color:red">**[1]**</b>enter 即可，没过一会便安好了，但是第一次的时候download失败（也许是和那边的服务器连接断了）
@@ -67,7 +67,7 @@ $ gem sources --remove https://rubygems.org/
 $ gem install jekyll                            #此时依然报错，按照给出的未安装的gem包安装即可
 ```
 
-- ##### 安装jekyll成功
+- ##### 用jekyll本地预览博客
 
 ```
 $ cd  <username>.github.io    #进入博客所在文件夹，此处省略路径
