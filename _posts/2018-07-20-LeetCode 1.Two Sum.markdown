@@ -1,0 +1,74 @@
+---
+layout: post
+title: "LeetCode 1.Two Sum"
+description: "LeetCode第一题"
+tag: LeetCode 题解
+---
+
+<br>
+
+ **LeetCode 1.两数之和**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a herf="https://leetcode-cn.com/problems/two-sum/description/">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### &nbsp;&nbsp;&nbsp; 给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。
+
+##### &nbsp;&nbsp;&nbsp; 你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。
+
+<br />
+
+## **示例:**
+>给定 nums = [2, 7, 11, 15], target = 9
+
+>因为 nums[0] + nums[1] = 2 + 7 = 9
+
+>所以返回 [0, 1]
+
+<br />
+
+## **分析:**
+
+此题的C++环境要求使用vector;
+
+题目假定每个输入只有一种答案，也就是找到一种后即可break，且相同元素不能被重复利用，若整数数组中有重复的数字，则取此元素的最小下标（假设此元素与为找到的数）;
+
+可以用嵌套循环进行暴力搜索，在第二层重循环中找与第一层循环中匹配的数字。
+
+<br />
+## **题解:**
+
+```C++
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> index;
+        for(int i = 0; i < nums.size()-1; ++i)
+        {
+            for (int j = i+1; j < nums.size(); ++j) {
+                if (nums[j] == target - nums[i]){
+                	index.push_back(i);
+                	index.push_back(j);
+                	break;
+                }
+            }
+        }
+        return index;
+    }
+};
+```
+<br />
+## **不足:**
+  这题我的方法是暴力搜索，代码简单但是却有不足之处，看过题解之后发现时间复杂度可以优化;
+
+  利用哈希表，以空间换取时间的方式，将查找时间从 O(n)O(n) 降低到 O(1)O(1);
+
+  所以之后需要了解哈希表，以及<map>（STL关联容器）。
+
+
