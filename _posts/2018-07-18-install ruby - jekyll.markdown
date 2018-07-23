@@ -7,7 +7,7 @@ tag: jekyll
 
 #### 引：<b style="color:Gold">win 对开发者及其不友好</b>，不能用命令行配置各种环境，而且在安装ruby时，总是会download失败；而安装jekyll时，也会时而报错。总之，win真的太辣鸡了。
 
-安装ruby
+**安装ruby**
 ---
 ----
 
@@ -19,7 +19,7 @@ tag: jekyll
 
 
 - ##### 解压Devkit至指定目录
- 
+
 
 ![](/images/posts/install ruby - jekyll/1.png)
 
@@ -79,4 +79,3 @@ $ jekyll server               #开启jekyll，会给出一个地址，复制访�
 
 
  <div style="text-align:right;font-size:150%"> 至此，ruby及jekyll安装完毕 </div>
-
