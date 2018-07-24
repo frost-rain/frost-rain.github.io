@@ -11,7 +11,7 @@ tag: LeetCode 题解
 ---
 ---
 <p style="text-align:right;font-size:120%">
-<a herf="https://leetcode-cn.com/problems/two-sum/description/">
+<a href="https://leetcode-cn.com/problems/two-sum/description/">
 原题链接点这
 </a>
 </p>
@@ -70,5 +70,3 @@ public:
   利用哈希表，以空间换取时间的方式，将查找时间从 O(n)O(n) 降低到 O(1)O(1);
 
   所以之后需要了解哈希表，以及<map>（STL关联容器）。
-
-
