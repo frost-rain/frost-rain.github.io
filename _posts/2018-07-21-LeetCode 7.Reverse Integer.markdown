@@ -1,0 +1,70 @@
+---
+layout: post
+title: "LeetCode 7.Reverse Integer"
+description: "LeetCode第七题"
+tag: LeetCode 题解
+---
+
+<br />
+
+ **LeetCode 7.反转整数**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/reverse-integer/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### &nbsp;&nbsp;&nbsp; 给定一个 32 位有符号整数，将整数中的数字进行反转。
+
+<br />
+
+## **示例:**
+
+####  示例1:
+>输入: 123
+
+>输出: 321
+
+####   示例2:
+>输入: -123
+
+>输出: -321
+
+####  示例3:
+>输入: 120
+
+>输出: 21
+
+<br />
+
+## **分析:**
+
+此题较简单，关键在于判断反转后的整数是否溢出;
+
+利用数学方法将整数的每一位取出来，每取一位将rev乘以10，直至最后一位，并且判断整数是否溢出。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    int reverse(int x) {
+        int rev = 0;
+        while(x != 0){
+            int last = x%10;
+            x = x/10;
+            if (rev > INT_MAX/10) return 0;
+            if (rev < INT_MIN/10) return 0;
+            rev = rev*10 + last;
+        }
+        return rev;
+    }
+};
+```
+
