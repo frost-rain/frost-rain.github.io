@@ -7,7 +7,7 @@ tag: LeetCode 题解
 
 <br />
 
- **LeetCode 7.回文数**
+ **LeetCode 9.回文数**
 ---
 ---
 <p style="text-align:right;font-size:120%">
