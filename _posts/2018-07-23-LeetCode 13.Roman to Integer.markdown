@@ -1,0 +1,139 @@
+---
+layout: post
+title: "LeetCode 13.Roman to Integer"
+description: "LeetCode第十三题"
+tag: LeetCode 题解
+---
+
+<br />
+
+ **LeetCode 13.罗马数字转整数**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/roman-to-integer/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### &nbsp;&nbsp;&nbsp; 罗马数字包含以下七种字符：I， V， X， L，C，D 和 M。
+
+|字符|I|V|X|L|C|D|M|
+|:--:|
+|数字| 1 | 5 |10|50|100|500|1000|
+
+如， 罗马数字 2 写做 <b style="color:FireBrick">II</b> ，即为两个并列的 1。12 写做 <b style="color:FireBrick">XII</b> ，即为 <b style="color:FireBrick">X + II </b>。 27 写做  <b style="color:FireBrick">XXVII</b>, 即为 <b style="color:FireBrick">XX + V + II</b>。
+
+通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做<b style="color:FireBrick"> IIII</b>，而是<b style="color:FireBrick">IV</b>。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 <b style="color:FireBrick">IX</b>。这个特殊的规则只适用于以下六种情况：
+
+<b style="color:FireBrick">I</b> 可以放在 <b style="color:FireBrick">V</b> (5) 和 <b style="color:FireBrick">X</b> (10) 的左边，来表示 4 和 9。
+
+<b style="color:FireBrick">X</b> 可以放在 <b style="color:FireBrick">L</b> (50) 和 <b style="color:FireBrick">C</b> (100) 的左边，来表示 40 和 90。 
+
+<b style="color:FireBrick">C</b> 可以放在 <b style="color:FireBrick">D</b> (500) 和 <b style="color:FireBrick">M</b> (1000) 的左边，来表示 400 和 900。
+
+<b style="color:skyblue;font-size:1.2em">给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</b>
+
+<br />
+
+## **示例:**
+
+#### 示例1:
+
+>输入: "III"
+
+>输出: 3
+
+#### 示例2:
+
+>输入: "IV"
+
+>输出: 4
+
+####  示例3:
+
+>输入: "IX"
+
+>输出: 9
+
+#### 示例4:
+
+>输入: "LVIII"
+
+>输出: 58
+
+>解释: C = 100, L = 50, XXX = 30, III = 3.
+
+#### 示例5:
+
+>输入: "MCMXCIV"
+
+>输出: 1994
+
+>解释: M = 1000, CM = 900, XC = 90, IV = 4.
+
+<br />
+
+## **分析:**
+
+这题的关键在于小的数字在大的数字左边的情况下应怎样判断并计算;
+
+假设小的数字全在大的数字右边，则只要将每一个罗马数字换成阿拉伯数字全部相加即可，当小的数字出现在大的数字
+左边时，要减去小数字对应的值，可以用if语句判断<b style="color:FireBrick">I</b>、<b style="color:FireBrick">X</b> 、<b style="color:FireBrick">C</b>的下一位是否是相应的大数，若是则减去这个小数，不是则加上这个小数，循环每一位罗马数字，便可计算出结果。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    int romanToInt(string s) {
+        int x = 0;
+        for (int i = 0; s[i] != '\0'; ++i){
+            switch(s[i]){
+                case 'I':
+                    if (s[i+1] == 'V' || s[i+1] == 'X') x += -1;
+                    else x += 1;
+                    break;
+                case 'V':
+                    x += 5;
+                    break;
+                case 'X':
+                    if (s[i+1] == 'L' || s[i+1] == 'C') x += -10;
+                    else x += 10;
+                    break;
+                case 'L':
+                    x += 50;
+                    break;
+                case 'C':
+                    if (s[i+1] == 'D' || s[i+1] == 'M') x += -100;
+                    else x += 100;
+                    break;
+                case 'D':
+                    x += 500;
+                    break;
+                case 'M':
+                    x += 1000;
+                    break;
+                default:
+                    break;
+
+            }
+        }
+        return x;
+    }
+};
+```
+
+<br />
+
+## **不足:**
+
+做这道题时一直在纠结用什么方法，导致做题速度过慢，并且最后的算法也很不满意，归根结底还是因为做的题不够多;
+
+这道题还可以用unordered_map去做，但是因为对这个还不太熟悉，于是放弃了，一定要花时间熟练<map>容器;
+
+做题时必须要把逻辑厘清，不能思路混乱地去做。
