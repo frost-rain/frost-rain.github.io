@@ -1,0 +1,94 @@
+---
+layout: post
+title: "LeetCode 9.Palindrome Number"
+description: "LeetCode第九题"
+tag: LeetCode 题解
+---
+
+<br />
+
+ **LeetCode 7.回文数**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/palindrome-number/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### &nbsp;&nbsp;&nbsp; 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+
+<br />
+
+## **示例:**
+
+#### 示例1:
+
+>输入: 121
+
+>输出: true
+
+#### 示例2:
+
+>输入: -121
+
+>输出: false
+
+>解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。
+
+####  示例3:
+
+>输入: 10
+
+>输出: false
+
+>解释: 从右向左读, 为 01 。因此它不是一个回文数。
+
+<b style="color:skyblue;font-size:1.2em">注意:不将整数转为字符串解决此问题 </b>
+
+<br />
+
+## **分析:**
+
+题目要求不将整数转换为字符串;
+
+根据题意，可以知道负数一定不是回文数，以及个位数为零的也不是回文数，所以可以先剔除掉负数和个位数为零的数;
+
+不能转换为字符串则要使用数学方法将整数反转，可以用
+&nbsp;&nbsp;&nbsp;  <b style="color:skyblue;font-size: 1.2em">rev = rev * 10 + x%10; &nbsp;&nbsp;&nbsp;x /=10;&nbsp;&nbsp;&nbsp;</b>将整数反转;
+
+回文数是对称的，所以可以只反转一半的数字，而怎么判断回文数反转了一半是个关键。可以将rev与x进行比较，当rev大于x时则可认为已经反转了一半;
+
+判断奇数是否为回文数也是一个关键，当反转后跳出循环，rev一定要比x大，而rev的位数加x的位数即此奇数的所有位数，则rev要比x多一位数，且多的是个位数，所以有此判断<b style="color:skyblue;font-size: 1.2em">&nbsp;&nbsp;&nbsp; if  (rev/10 == x) &nbsp;&nbsp;&nbsp;</b>;
+
+0也是个特殊的数字，在解题时需要特别注意。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if (x <0 || (x%10 ==0 && x !=0)) return false;
+        int rev = 0;
+        while (x >rev) {
+            rev = rev * 10 + x%10;
+            x /= 10;
+        }
+        if (rev == x || rev/10 == x) return true;
+        else return false;
+    }
+};
+````
+
+<br />
+
+## **不足:**
+
+这题很简单，但是提交多次基本上是挂在0这个测试样例上面，原因在于解题过程不细心，并且在改的过程中也没认真推敲，而是觉得哪里有问题就直接更改，错了再继续改有问题的地方。
+
+之后做题一定要冷静下来，认真想想算法有没有逻辑错误。并且有问题的话好好思考，而不是胡乱的瞎改。解题中也必须厘清思路，不能随便略过一些小地方。
