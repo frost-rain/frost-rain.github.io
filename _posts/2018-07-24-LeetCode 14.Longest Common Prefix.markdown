@@ -1,0 +1,81 @@
+---
+layout: post
+title: "LeetCode 14.Longest Common Prefix"
+description: "LeetCode第十四题"
+tag: LeetCode 题解
+---
+
+<br />
+
+ **LeetCode 14.最长公共前缀**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/longest-common-prefix/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### &nbsp;&nbsp;&nbsp;编写一个函数来查找字符串数组中的最长公共前缀。
+
+##### &nbsp;&nbsp;&nbsp;如果不存在公共前缀，返回空字符串 ""。
+
+<br />
+
+## **示例:**
+
+#### 示例1:
+
+>输入: ["flower","flow","flight"]
+
+>输出: **"fl"**
+
+#### 示例2:
+
+>输入: ["dog","racecar","car"]
+
+>输出: ""
+
+>解释: 输入不存在公共前缀。
+
+<b style="color:skyblue;font-size:1.2em">所有输入只包含小写字母 </b>  <b style="color:FireBrick;font-size:1.2em">a-z </b>。
+
+<br />
+
+## **分析:**
+
+此题简单，关键点在于如何优化算法，解题很容易，但是优化时间复杂度是有必要的;
+
+考虑到无字符串时及字符串只有一个时的情况，分别判断返回""及第一个字符串;
+
+假设第一个和第二个先进行比较，得出公共子串，之后的比较得出的子串一定不能长于第一次比较得出的子串，所以可以将第一个字符串截断，截断至公共子串。第一个字符串与之后的字符串相比较后总是改变第一个字符串，最后返回第一个字符串。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs){
+        if (!strs.size())  return "";
+        if (strs.size() == 1)  return strs[0];
+        for (int i = 0; i < strs[0].length(); ++i){
+            for (int j = 0; j < strs.size(); ++j){
+                if (strs[j][i] != strs[0][i])  strs[0][i] = '\0';
+            }
+        }
+        return strs[0];
+    }
+};
+```
+
+<br />
+
+## **不足:**
+
+这道题解题方法容易想到，但是要减少程序运行时间需要不少的时间思考;
+
+还是需要加强练习，改善自己的思维。对于每道题，都可以看看其他人的方法，了解一下别人的思路。
