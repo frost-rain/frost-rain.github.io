@@ -18,6 +18,10 @@ tag: LeetCode 题解
 
 ## **题目:**
 
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp;类型: &nbsp; 字符串 </b>
+
+<br />
+
 ##### &nbsp;&nbsp;&nbsp;编写一个函数来查找字符串数组中的最长公共前缀。
 
 ##### &nbsp;&nbsp;&nbsp;如果不存在公共前缀，返回空字符串 ""。

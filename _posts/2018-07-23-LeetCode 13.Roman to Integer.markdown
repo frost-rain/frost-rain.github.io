@@ -18,6 +18,10 @@ tag: LeetCode 题解
 
 ## **题目:**
 
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp;类型: &nbsp; 数学 &nbsp; 字符串 </b>
+
+<br />
+
 ##### &nbsp;&nbsp;&nbsp; 罗马数字包含以下七种字符：I， V， X， L，C，D 和 M。
 
 |字符|I|V|X|L|C|D|M|
@@ -30,7 +34,7 @@ tag: LeetCode 题解
 
 <b style="color:FireBrick">I</b> 可以放在 <b style="color:FireBrick">V</b> (5) 和 <b style="color:FireBrick">X</b> (10) 的左边，来表示 4 和 9。
 
-<b style="color:FireBrick">X</b> 可以放在 <b style="color:FireBrick">L</b> (50) 和 <b style="color:FireBrick">C</b> (100) 的左边，来表示 40 和 90。 
+<b style="color:FireBrick">X</b> 可以放在 <b style="color:FireBrick">L</b> (50) 和 <b style="color:FireBrick">C</b> (100) 的左边，来表示 40 和 90。
 
 <b style="color:FireBrick">C</b> 可以放在 <b style="color:FireBrick">D</b> (500) 和 <b style="color:FireBrick">M</b> (1000) 的左边，来表示 400 和 900。
 
