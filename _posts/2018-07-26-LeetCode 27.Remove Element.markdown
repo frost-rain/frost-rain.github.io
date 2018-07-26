@@ -1,0 +1,78 @@
+---
+layout: post
+title: "LeetCode 27.Remove Element"
+description: "LeetCode第二十七题"
+tag: LeetCode 题解
+---
+
+<br />
+
+ **LeetCode 27.移除元素**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/remove-element/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:** 
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 数组 &nbsp; 双指针 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp; 给定一个数组 nums 和一个值 val，你需要<b style="color:skyblue">原地移除</b>所有数值等于 val 的元素，返回移除后数组的新长度。
+
+##### &nbsp;&nbsp;&nbsp; <b style="color:skyblue">不要使用额外的数组空间</b>，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。
+
+##### &nbsp;&nbsp;&nbsp; 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+
+<br />
+
+## **示例:**
+
+#### 示例1:
+
+>给定 nums = [3,2,2,3], val = 3,
+
+>函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。
+
+>你不需要考虑数组中超出新长度后面的元素。
+
+#### 示例2:
+
+>给定 nums = [0,1,2,2,3,0,4,2], val = 2,
+
+>函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。
+
+>注意这五个元素可为任意顺序。
+
+>你不需要考虑数组中超出新长度后面的元素。
+
+<br />
+  
+## **分析:**
+
+跳过需要删除的元素，将数组后面的元素全部移向数组前面。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        if (nums.empty())  return 0;
+        int i = -1;
+        for (int j =0; j < nums.size(); ++j){
+            if (nums[j] != val)  nums[++i] = nums[j];
+        }
+        return i + 1;
+    }
+};
+```
+
+
+
