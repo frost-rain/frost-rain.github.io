@@ -18,7 +18,7 @@ tag: LeetCode 题解
 
 ## **题目:**
 
-##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp;类型: &nbsp; 数组 &nbsp; 哈希表 </b>
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 数组 &nbsp; 哈希表 </b>
 
 <br />
 

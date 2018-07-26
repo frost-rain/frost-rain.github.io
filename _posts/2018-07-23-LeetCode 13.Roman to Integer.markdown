@@ -18,7 +18,7 @@ tag: LeetCode 题解
 
 ## **题目:**
 
-##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp;类型: &nbsp; 数学 &nbsp; 字符串 </b>
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 数学 &nbsp; 字符串 </b>
 
 <br />
 
