@@ -1,0 +1,121 @@
+---
+layout: post
+title: "LeetCode 20.Valid Parentheses"
+description: "LeetCode第二十题"
+tag: "LeetCode 题解"
+---
+
+<br />
+
+ **LeetCode 20.有效的括号**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/valid-parentheses/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:** 
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp;类型: &nbsp; 栈 &nbsp; 字符串 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp;给定一个只包括**<b style="color:FireBrick">&nbsp;&nbsp;&nbsp;'('&nbsp;&nbsp;&nbsp;, &nbsp;&nbsp;&nbsp;')'&nbsp;&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;'{'&nbsp;&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;'}'&nbsp;&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;'['&nbsp;&nbsp;&nbsp;,&nbsp;&nbsp;&nbsp;']'</b>**的字符串，判断字符串是否有效。
+
+##### &nbsp;&nbsp;&nbsp;有效字符串需满足：
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  1.左括号必须用相同类型的右括号闭合。
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2.左括号必须以正确的顺序闭合。
+
+##### &nbsp;&nbsp;&nbsp;注意空字符串可被认为是有效字符串。
+
+<br />
+
+## **示例:**
+
+#### 示例1:
+
+>输入: "()"
+
+>输出: true
+
+#### 示例2:
+
+>输入: "()[]{}"
+
+>输出: true
+
+####  示例3:
+
+>输入: "(]"
+
+>输出: false
+
+#### 示例4:
+
+>输入: "([)]"
+
+>输出: false
+
+#### 示例5:
+
+>输入: "{[]}"
+
+>输出: true
+
+<br />
+
+## **分析:**
+
+这道题可以从第一个右括号开始切入，第一个右括号左边必定要是匹配的左括号;
+
+从第一个右括号开始匹配，逐步向剩余的括号匹配，每匹配一对可以删除这对括号，如果将字符串中相应的括号以空格代替，还需要跳过括号进行判断，或是删除这一对括号，则要消耗更多的资源将字符串移动，所以需要使用其他的方法进行括号匹配;
+
+使用栈无疑可以提高程序的效率，根据栈的特点，只需将还未匹配的括号压入栈中，匹配的括号一个不压入栈，另一个从栈中删除，最后检测是否栈空即可（匹配的括号一定是相邻的）。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> str;
+        for (int i = 0; s[i] != '\0'; ++i){
+            switch(s[i]){
+                case '(':
+                case '{':
+                case '[':
+                    str.push(s[i]);
+                    break;
+                case ')':
+                    if (str.empty() || str.top() != '(') return false;
+                    else str.pop();
+                    break;
+                case ']':
+                    if (str.empty() || str.top() != '[') return false;
+                    else str.pop();
+                    break;
+                case '}':
+                    if (str.empty() || str.top() != '{') return false;
+                    else str.pop();
+                    break;
+                default:
+                    break;
+            }
+        }
+        return str.empty();
+    }
+};
+```
+<br />
+
+## **不足:**
+
+解题的时间还是比较长，总是推翻一些复杂的想法，无意中点到这道题的分类才想到用栈解题;
+
+以后做题要对同一类型的题目进行归纳总结，熟练掌握各种方法。
