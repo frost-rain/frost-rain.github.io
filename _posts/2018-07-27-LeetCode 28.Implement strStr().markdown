@@ -1,0 +1,85 @@
+---
+layout: post
+title: "LeetCode 28.Implement strStr()"
+description: "LeetCode第二十八题"
+tag: LeetCode 题解
+---
+
+<br />
+
+ **LeetCode 28.实现strStr()**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/implement-strstr/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:** 
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 字符串 &nbsp; 双指针 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp; 实现 strStr() 函数。
+
+##### &nbsp;&nbsp;&nbsp; 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+
+## **示例:**
+
+#### 示例1:
+
+>输入: haystack = "hello", needle = "ll"
+
+>输出: 2
+
+#### 示例2:
+
+>输入: haystack = "aaaaa", needle = "bba"
+
+>输出: -1
+
+<b style="color:skyblue;font-size:1.2em">当<b style="color:FireBrick;font-size:1.2em"> needle</b> 是空字符串时我们应当返回 <b style="color:FireBrick;font-size:1.2em">0</b> 。</b>
+
+<br />
+  
+## **分析:**
+
+这题可以从needle的首字母切入，在haystack中遍历，找needle[0];
+
+若找到needle[0]，则开始判断对应的子串是否与needle匹配，每一个字符都进行判断，最后若needle遍历至最后可确定haystack中有needle子串，并返回haystack的下标值。
+
+如果不存在，则返回0。
+
+注意: haystack遍历的最大下标不能大于两字符串长度的差值。所以可以有此判断&nbsp; i < haystack.length() - needle.length() + 1 &nbsp; 将循环的次数减少，减少程序运行的时间。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if (needle.empty()) return 0;
+        int l = haystack.length() - needle.length() + 1;
+        for (int i = 0; i < l; ++i){
+            if (haystack[i] == needle[0]){
+                int j = 0,t = i-1;
+                while(needle[j] != '\0' && needle[j] == haystack[++t]){
+                    ++j;
+                }
+                if (needle[j] == '\0') return i;
+            }
+        }
+        return -1;
+    }
+};
+```
+
+<br />
+
+## **不足:**
+
+对于每一个题目，不能够写出来就行，还需要继续思考，改善程序，提高程序的效率。
