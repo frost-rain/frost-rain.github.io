@@ -16,7 +16,7 @@ tag: LeetCode 题解
 </a>
 </p>
 
-## **题目:** 
+## **题目:**
 
 ##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 字符串 &nbsp; 双指针 </b>
 
@@ -25,6 +25,8 @@ tag: LeetCode 题解
 ##### &nbsp;&nbsp;&nbsp; 实现 strStr() 函数。
 
 ##### &nbsp;&nbsp;&nbsp; 给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+
+<br />
 
 ## **示例:**
 
@@ -43,7 +45,7 @@ tag: LeetCode 题解
 <b style="color:skyblue;font-size:1.2em">当<b style="color:FireBrick;font-size:1.2em"> needle</b> 是空字符串时我们应当返回 <b style="color:FireBrick;font-size:1.2em">0</b> 。</b>
 
 <br />
-  
+
 ## **分析:**
 
 这题可以从needle的首字母切入，在haystack中遍历，找needle[0];
