@@ -1,0 +1,97 @@
+---
+layout: post
+title: "LeetCode 35.Search Insert Position"
+description: "LeetCode第三十五题"
+tag: LeetCode 题解
+---
+
+<br />
+
+ **LeetCode 35.搜索插入位置**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/search-insert-position/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:** 
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 数组 &nbsp; 二分查找 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp; 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
+
+##### &nbsp;&nbsp;&nbsp; 你可以假设数组中无重复元素。
+
+<br />
+
+## **示例:**
+
+#### 示例1:
+
+>输入: [1,3,5,6], 5
+
+>输出: 2
+
+#### 示例2:
+
+>输入: [1,3,5,6], 2
+
+>输出: 1
+
+####  示例3:
+
+>输入: [1,3,5,6], 7
+
+>输出: 4
+
+#### 示例4:
+
+>输入: [1,3,5,6], 0
+
+>输出: 0
+
+<br />
+
+## **分析:**
+
+此题的数组是有序的，应使用二分查找提高查找效率;
+
+若数组中有相应的数字，则返回下标值，没有的话返回对应应插入的下标。根据二分查找的性质，最后返回low值即可。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int low = 0;
+        int high = nums.size() -1;
+        int mid;
+        while(low <= high){
+            mid = (low+high)/2;
+            if (nums[mid] == target) return mid;
+            if (target < nums[mid]) high = mid-1;
+            else low = mid +1;
+        }
+    /*  for (int i = nums.size(); i > low; --i){
+            nums[i] = nums[i-1];
+        }
+        nums.push_back(target);  
+        nums[low] = target;   */
+	//上面两个插入方式，第一个没有问题（应用insert），第二个直接跳出debug，运行不了，暂时没找到错误原因
+        return low;
+    }
+};
+```
+
+<br />
+
+## **不足:**
+
+要熟悉vector的各种常用函数，并搞清vector的正确使用方法，避免经常将vector用错。
