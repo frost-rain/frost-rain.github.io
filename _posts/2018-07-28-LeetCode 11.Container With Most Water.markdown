@@ -1,0 +1,82 @@
+---
+layout: post
+title: "LeetCode 11.Container With Most Water"
+description: "LeetCode第十一题"
+tag: LeetCode 题解
+---
+
+<br />
+
+ **LeetCode 11.盛最多水的容器**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/container-with-most-water/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:** 
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 数组 &nbsp; 双指针 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp; 给定 n 个非负整数 a1，a2，...，an，每个数代表坐标中的一个点 (i, ai) 。
+
+##### &nbsp;&nbsp;&nbsp; 在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。
+
+##### &nbsp;&nbsp;&nbsp; 说明：你不能倾斜容器，且 n 的值至少为 2。
+
+<img src="/images/posts/LeetCode 11.Container With Most Water/1.jpg" height="250" width="500">
+
+<p style="text-align:center"> 图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</p>
+
+<br />
+
+## **示例:**
+
+>输入: [1,8,6,2,5,4,8,3,7]
+
+>输出: 49
+
+<br />
+
+## **分析:**
+
+两数中较小的数为高，两数下标值之差为底;
+
+要使面积最大，则尽可能使高和底越大。在减少底的大小的时候，需要向内寻找使高更大的一对数。定义两个指针，从数组两端开始遍历，比较两数的大小，数值较小的指针向数值较大的指针移动;
+
+同时定义一个max值，存储最大面积。在每次指针移动后，都将计算面积值，新的面积若大于max值，则max值更新;
+
+最后当两指针相遇时，遍历结束，返回此时的max值。
+
+<br />
+
+## **题解:**
+
+```C++
+int maxArea(vector<int>& height) {
+        int max = 0;
+        int p = 0,q = height.size() - 1;
+        while (q > p){
+            if (height[q] > height[p]) {
+                if((q-p)*height[p] > max) max = (q-p)*height[p];
+                ++p;
+            }
+            else{
+                if((q-p)*height[q] > max) max = (q-p)*height[q];
+                --q;
+            }
+        }
+        return max;
+```
+
+<br />
+
+## **不足:**
+
+这题开始想的是暴力搜索法，但是又觉得程序的效率太低了，于是思考有没有其它方法，最后实在没想出来，去看官方的题解，但是官方的题解看的还是有点迷，方法是很简单，但是没有证明过程，点开官方给的证明链接也没什么用，是代码，没有这个方法的证明。想了很久还是不知道这个方法是怎么证明的，有时间的话多去网上查查;
+
+每一个题若和数学有关，尽量弄懂原理。
