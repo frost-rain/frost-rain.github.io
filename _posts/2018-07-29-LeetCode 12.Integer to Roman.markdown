@@ -1,0 +1,127 @@
+---
+layout: post
+title: "LeetCode 12.Integer to Roman"
+description: "LeetCode第十二题"
+tag: LeetCode 题解
+---
+
+<br />
+
+ **LeetCode 12.整数转罗马数字**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/integer-to-roman/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 数学 &nbsp; 字符串 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp; 罗马数字包含以下七种字符：I， V， X， L，C，D 和 M。
+
+|字符|I|V|X|L|C|D|M|
+|:--:|
+|数字| 1 | 5 |10|50|100|500|1000|
+
+如， 罗马数字 2 写做 <b style="color:FireBrick">II</b> ，即为两个并列的 1。12 写做 <b style="color:FireBrick">XII</b> ，即为 <b style="color:FireBrick">X + II </b>。 27 写做  <b style="color:FireBrick">XXVII</b>, 即为 <b style="color:FireBrick">XX + V + II</b>。
+
+通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做<b style="color:FireBrick"> IIII</b>，而是<b style="color:FireBrick">IV</b>。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 <b style="color:FireBrick">IX</b>。这个特殊的规则只适用于以下六种情况：
+
+<b style="color:FireBrick">I</b> 可以放在 <b style="color:FireBrick">V</b> (5) 和 <b style="color:FireBrick">X</b> (10) 的左边，来表示 4 和 9。
+
+<b style="color:FireBrick">X</b> 可以放在 <b style="color:FireBrick">L</b> (50) 和 <b style="color:FireBrick">C</b> (100) 的左边，来表示 40 和 90。
+
+<b style="color:FireBrick">C</b> 可以放在 <b style="color:FireBrick">D</b> (500) 和 <b style="color:FireBrick">M</b> (1000) 的左边，来表示 400 和 900。
+
+<b style="color:skyblue;font-size:1.2em">给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</b>
+
+<br />
+
+## **示例:**
+
+#### 示例1:
+
+>输入: 3
+
+>输出: "III"
+
+#### 示例2:
+
+>输入: 4
+
+>输出: "IV"
+
+####  示例3:
+
+>输入: 9
+
+>输出: "IX"
+
+#### 示例4:
+
+>输入: 58
+
+>输出: "LVIII"
+
+>解释: C = 100, L = 50, XXX = 30, III = 3.
+
+#### 示例5:
+
+>输入: 1994
+
+>输出: "MCMXCIV"
+
+>解释: M = 1000, CM = 900, XC = 90, IV = 4.
+
+<br />
+
+## **分析:**
+
+这题很简单，题解即思路;
+
+还可以提取每一位的数字，用switch语句进行判断，但是自己写出来的效率却不及下面那一个。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    string intToRoman(int num) {
+        string roman;
+        while (num != 0){
+            if (num <= 3) {roman += "I"; num -= 1;}
+            if (num == 4) {roman += "IV"; num -= 4;}
+            if (num > 4 && num <9) {roman += "V"; num -= 5;}
+            if (num == 9) {roman += "IX"; num -= 9;}
+            if (num >9 && num < 40) {roman += "X"; num -= 10;}
+            if (num >= 40 && num < 50) {roman += "XL"; num -= 40;}
+            if (num >= 50 && num < 90) {roman += "L"; num -= 50;}
+            if (num >= 90 && num < 100) {roman += "XC"; num -= 90;}
+            if (num >= 100 && num < 400)  {roman += "C"; num -= 100;}
+            if (num >= 400 && num < 500) {roman += "CD"; num -= 400;}
+            if (num >= 500 && num < 900)  {roman += "D"; num -= 500;}
+            if (num >= 900 && num < 1000)  {roman += "CM"; num -= 900;}
+            if (num >= 1000)  {roman += "M"; num -= 1000;}
+        }
+        return roman;
+    }
+};
+```
+
+<br />
+
+## **不足:**
+
+写出来后想着怎么优化程序，结果想了几个小时的的成果反而效率变低了，需要看一下其他人的代码了解一下他人的思路。
+
+
+
+
+
