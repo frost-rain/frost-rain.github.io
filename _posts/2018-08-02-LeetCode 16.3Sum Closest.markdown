@@ -1,0 +1,84 @@
+---
+layout: post
+title: "LeetCode 16.3Sum Closest"
+description: "LeetCode第十六题"
+tag: LeetCode 题解
+---
+
+<br />
+
+ **LeetCode 16.最接近的三数之和**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/3sum-closest/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 数组 &nbsp; 双指针 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp; 给定一个包括 n 个整数的数组 <b style="color:FireBrick">nums</b> 和 一个目标值 <b style="color:FireBrick">taget</b>。找出 <b style="color:FireBrick">nums</b> 中的三个整数，使得它们的和与 <b style="color:FireBrick">taget</b> 最接近。返回这三个数的和。假定每组输入只存在
+
+##### &nbsp;&nbsp;&nbsp; 唯一答案。
+
+<br />
+
+## **示例:**
+
+>例如，给定数组 nums = [-1，2，1，-4], 和 target = 1.
+
+>与 target 最接近的三个数的和为 2. (-1 + 2 + 1 = 2).
+
+<br />
+
+## **分析:**
+
+据题意，暴力法将数组中的每种组合全都加一遍不可取。一定存在某种方法，可以将遍历的三位整数组合减少;
+
+三位整数相加，可以先用一个for循环确定一个整数，接下来就是两位整数相加。联想到盛最多水的容器那题，可以发现，若 target 大于某三位数之和，那么接下来改动的一位数只能增加它的值，若 target 小于某三位数之和，接下来改动的一位数只能减小它的值，由此可以使用双指针解题，一个置于表头，一个置于表尾。三位数之和若小于  target ，则 ++p ,大于则 -\-q;
+
+初始化sum为INT_MIN，在循环当中初始化temp = nums[p] + nums[q] + nums[i] 即三位数的和，每次比较完  temp 与 target 的大小将p，q移动后，比较 fabs(temp -target) 与 fabs(sum - target) 的大小，判断是否将 temp 赋给 sum;
+
+注意 temp 等于 target 的情况，最后在循环外 return sum 即可。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    int threeSumClosest(std::vector<int>& nums, int target) {
+        std::sort(nums.begin(),nums.end());
+        int sum = INT_MIN;
+        for (int i = 1; i < nums.size() - 1; ++i){
+            int p = 0,q = nums.size() - 1;
+            while (p < q){
+                int temp = nums[p] + nums[q] + nums[i];
+                if (temp == target) return target;
+                if (temp > target) {
+                    --q;
+                    if(q == i) --q;
+                }
+                else {
+                    ++p;
+                    if(p == i) ++p;
+                }
+                if (std::fabs(temp - target) <= std::fabs(sum - target)) sum = temp;
+            }
+        }
+        return sum;
+    }
+};
+```
+
+<br />
+
+## **不足:**
+
+一些特殊情况考虑的不是非常妥当，以后解题时需要多加考特殊情况，完善代码。
