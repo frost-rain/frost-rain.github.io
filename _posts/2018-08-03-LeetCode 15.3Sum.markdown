@@ -1,0 +1,123 @@
+---
+layout: post
+title: "LeetCode 15.3Sum"
+description: "LeetCode第十五题"
+tag: LeetCode 题解
+---
+
+<br />
+
+ **LeetCode 15.三数之和**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/3sum/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 数组 &nbsp; 双指针 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp; 给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重
+
+##### &nbsp;&nbsp;&nbsp; 复的三元组。
+
+<b style="color:skyblue;font-size:1.2em;">注意：答案中不可以包含重复的三元组。</b>
+
+<br />
+
+## **示例:**
+
+>例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，
+
+>满足要求的三元组集合为：
+
+>[
+
+>&nbsp; [-1, 0, 1],
+
+>&nbsp; [-1, -1, 2]
+
+>]
+
+<br />
+
+## **分析:**
+
+本题的关键在于如何去重;
+
+这道题的思路和最接近的三数之和差不多，先确定一个数值，然后再对剩下两个数值相加进行判断;
+
+难点在于去重，直接进行指针移动会使数组有很多重复项，所以需要想办法将重复的数组去掉;
+
+一个是将所有的目标数组都存入二维数组当中，最后对二维数组进行去重，这个方法个人认为实现起来简单，但是会耗费空间与时间，所以并没有采用;
+
+另一个则是在遍历数组的时候就进行判断，这道题有很多特殊地输入样例，根据特殊的输入样例对代码进行优化;
+
+对于去重，则可以使用while跳过一些重复的数字（不可以sort完后直接去重），对于第一个确定的数字先跳过重复的数字，然后再由p,q两个指针移动，判断三数之和是否等于0，p,q移动时也需要跳过重复的数字;
+
+在三数之和移动的循外根据特殊的输入样例判断返回的二维数组，多想一些特殊的输入样例进行判断，最后完成提交即可。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
+        std::vector<std::vector<int>> result;
+        if (nums.size() < 3) return result;
+        std::sort(nums.begin(),nums.end());
+        if(nums[0] > 0 || nums[nums.size()-1] < 0 || (nums[nums.size()-1] == 0 && nums[nums.size()-3] != 0)) 
+	return result;
+        int index = 0; //记录有多少个三元组
+        if(nums [0] == 0 && nums[0] == nums[nums.size()-1]) {
+            result.push_back({0,0,0});
+            return result;
+        }
+        for(int i = 0; nums[i] <= 0; ++i){
+            int p = i + 1;
+            int q = nums.size() -1;
+            if(nums[i] == 0 && nums[i+1] == 0 && nums[i+2] == 0){
+                result.resize(index+1);
+                result[index].push_back(0);
+                result[index].push_back(0);
+                result[index].push_back(0);
+            }
+            while(nums[i]  == nums[i+1]) {++i; p = i;}
+            while(p < q) {
+                int temp = -(nums[p] + nums[q]);
+                if (temp == nums[i]) {
+                    result.resize(index + 1);
+                    result[index].push_back(nums[i]);
+                    result[index].push_back(nums[p]);
+                    result[index].push_back(nums[q]);
+                    ++index;
+                }
+                if(temp < nums[i]){
+                    while(nums[q] == nums[q-1]) --q;
+                    --q;
+                }
+                else {
+                    while(nums[p] == nums[p+1]) ++p;
+                    ++p;
+                }
+            }
+        }
+        return result;
+    }
+};
+```
+
+<br />
+
+## **不足:**
+
+花在改代码上的时间太长了，提交了很多回，总是有特殊的输入样例出错，错哪里就改，一直试了很多回;
+
+还是需要多加练习，改善自己的思维。
