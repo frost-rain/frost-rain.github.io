@@ -1,0 +1,155 @@
+---
+layout: post
+title: "LeetCode 17.Letter Combinations of a Phone Number"
+description: "LeetCode第十七题"
+tag: LeetCode 题解
+---
+<style>
+.img{
+	float:left;
+}
+</style>
+
+
+<br />
+
+ **LeetCode 17.电话号码的字母组合**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 字符串 &nbsp; 回溯算法 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp; 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+
+##### &nbsp;&nbsp;&nbsp; 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+
+<br />
+
+<img class="img"  src="/files/LeetCode 17.Letter Combinations of a Phone Number/1.png" />
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+## **示例:**
+
+>输入："23"
+
+>输出：["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+
+<br />
+
+## **分析:**
+
+这道题要求我们将所有的字母组合全都遍历出来，多个for循环肯定是不可取的;
+
+据题意，要将字母组合返回string数组中，最好是能够将完整的一个组合遍历一次再放入数组中，也就是直接遍历到最后一个数的某个字母，使最后一个数不能再继续往后进行组合了。为了能够减少程序运行的时间，可以返回上一个数后再和最后一个数的另一个字母进行组合;
+
+这时候，可以联想到，可以用一个for循环将一个数的每个字母进行遍历，对于每一个数字都如此;
+
+于是，可以形成一个大概的遍历思路，对于第一个数，以一个for循环进行遍历。对于某一字母，可以继续往后进行组合，在这个函数当中嵌套一个一样的函数对下一个数的字母进行遍历，直到遍历到最后一位数的某个字母，这时候就可以返回一个正确的组合了;
+
+将这个思路实现为一个函数，当然，临界判断是有必要的，设定一个标记，当遍历到最后一个数时返回此时的字母组合;
+
+遍历到最后一个组合结束时，函数也正常的退出了。
+
+这道题解题利用的是回溯算法的回溯思想，回溯算法即递归加深度优先搜索。有很多时候，用好回溯算法会带来很大的帮助。
+
+<br />
+ps:函数形参表当中使用引用会降低程序运行的时间及减少内存占用。
+
+
+<br />
+
+## **题解:**
+
+#### 题解1:
+
+```C++
+class Solution {
+public:
+    std::vector<std::string> letterCombinations(std::string digits){
+        std::vector<std::string>  result;
+        if(digits.empty()) return result;
+        std::string letter[10] = {" ", " ", "abc", "def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        std::string path = "";
+        trackback(digits,result,letter,path,digits[0] - '0',0);
+        return result;
+    }
+    //递归调用，当遍历到最后一个数时停止深搜，并且将当前的值存入result中
+    void trackback(std::string &digits,std::vector<std::string> &result,std::string letter[],std::string &path,int index,int t){
+        if(t == digits.length() ){
+            result.push_back(path);
+            return;
+        }
+        for(int i = 0; i < letter[index].length(); ++i){
+            path += letter[index][i];
+            trackback(digits,result,letter,path,digits[t+1] - '0',t+1);
+            path.pop_back();
+        }
+    }
+};
+```
+
+<br />
+
+#### 题解2:
+
+```C++
+class Solution {
+public:
+    std::string letter[10] = {" ", " ", "abc", "def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    std::vector<std::string>  result;
+    std::vector<std::string> letterCombinations(std::string digits){
+        if(digits.empty()) return result;
+        traceback(digits,0," ");
+        return result;
+    }
+    //这里的形参表需特别注意，const std::string &path，这里的引用必须加const
+    /*error: cannot bind non-const lvalue reference of type 
+     'std::__cxx11::string&' {aka      'std::__cxx11::basic_string<char>&'} 
+     to an rvalue of type 'std::__cxx11::string' {aka     'std::__cxx11::basic_string<char>'}
+         traceback(digits,0," ");*/
+    //这是不加const时的报错，一定要多加注意，可能是因为传递过去的值是个常量
+
+
+    void traceback(std::string &digits,int index,const std::string &path){
+        if(index == digits.length()){
+            result.push_back(path);
+            return;
+        }
+        char num = digits[index];
+        std::string  l = letter[num-'0'];
+        for(int i = 0; i < l.length(); ++i){
+            traceback(digits,index+1,path+l[i]);
+        }
+    }
+};
+```
+
+<br />
+
+## **不足:**
+
+做这道题费了不少时间，对于回溯的思想理解还是不够深，大概的框架写的很快，但时间基本上都花在改代码上了;
+
+对于一种算法，最好是能够去看看教学视频了解，而不是一味的只看别人的博客或是看书，看看教学视频很有必要，有助于理解其中的思想。
+
+
+
+
+
+
+
+
+
+
+
+
