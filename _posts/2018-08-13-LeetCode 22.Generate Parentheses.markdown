@@ -1,0 +1,89 @@
+---
+layout: post
+title: "LeetCode 22.Generate Parentheses"
+description: "LeetCode第二十二题"
+tag: LeetCode 题解
+---
+
+<br />
+
+**LeetCode 22.括号生成**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/generate-parentheses/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 字符串 &nbsp; 回溯法 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp; 给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
+
+##### &nbsp;&nbsp;&nbsp;  例如，给出 n = 3，生成结果为：
+
+>[
+
+>&nbsp;&nbsp; "((()))",
+
+>&nbsp;&nbsp; "(()())",
+
+>&nbsp;&nbsp; "(())()",
+
+>&nbsp;&nbsp; "()(())",
+
+>&nbsp;&nbsp; "()()()"
+
+>]
+
+<br />
+
+## **分析:**
+
+这道题大致的思路比较简单，利用回溯算法解题;
+
+解题的关键是如何判断括号不匹配并返回查找其它的括号组合;
+
+一个l记录左括号的当前未用数量，r记录右括号的未用数量;
+
+从一个左括号开始，逐渐与左括号和右括号组合，右括号的数量一定不会超过左括号的数量，一旦超过，即可认为括号不匹配，返回，即 l > r 时返回，不再向后进行递归;
+
+最后当左括号与右括号数量相等且等于n的值时，可以将此时的括号组合存入result中;
+
+回溯完毕后，return result。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    std::vector<std::string> result;
+    std::vector<std::string> generateParenthesis(int n) {
+        if(n == 0) return result;
+        traceback(n,n,"");
+        return result;
+    }
+    //这里不能引用，使用引用反而使程序的运行时间增加了
+    void traceback(int l,int r,const std::string path){
+        if(l > r)  return;
+        if(l == 0 && r ==0){
+            result.push_back(path);
+            return;
+        }
+        if (l > 0) traceback(l-1,r,path+'(');
+        if (r > 0) traceback(l,r-1,path+')');
+    }
+};
+```
+
+<br />
+
+## **不足:**
+
+解题解得很懵逼，虽然做出来了，但是对于括号不匹配时的判断还是有点迷，感觉就应该这样，又觉得条件不够，不过，关于括号的问题也就一点，多做做熟练就行。
