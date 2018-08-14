@@ -1,0 +1,128 @@
+---
+layout: post
+title: "LeetCode 46.Permutations"
+description: "LeetCode第四十六题"
+tag: [LeetCode 题解]
+---
+
+<br />
+
+**LeetCode 46.全排列**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/permutations/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 回溯法 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp;给定一个没有重复数字的序列，返回其所有可能的全排列。
+
+<br />
+
+## **示例:**
+
+>输入: [1,2,3]
+
+>输出:
+
+>[
+ 
+>&nbsp;&nbsp; [1,2,3],
+ 
+>&nbsp;&nbsp; [1,3,2],
+
+>&nbsp;&nbsp; [2,1,3],
+ 
+>&nbsp;&nbsp; [2,3,1],
+ 
+>&nbsp;&nbsp; [3,1,2],
+ 
+>&nbsp;&nbsp; [3,2,1]
+
+>]
+
+<br />
+
+## **分析:**
+
+根据题目的要求，首先可以想到利用回溯法进行组合，for循环将每个数进行遍历，跳过已经被选过的数字是个关键。可以定义一个visited的数组，标记每个数字的访问情况，若被访问则跳过此数，这一情况需要特别注意数组的越界情况，因为数组比较多，容易反生越界。此方法见题解2;
+
+还有一个方法，直接在nums数组中进行交换，得到新的组合;
+
+交换两数的方法逻辑上有点难以理解，举一个例子，[1,2,3,4,5]，对于这个数组，按照以前学过的组合，可能会这样进行交换：1与2,3,4,5交换后，2再与3,4,5进行交换，这时候就会发现得到的组合少，并且不能往回继续反，得到的还是一样的，所以必须得有一个循环，把数组中的每一个位置都交换一遍;
+
+可以观察出这个交换方法,i=0时，1与2，2与3，3与4，4与5交换，i=1时，2与3交换......以此类推，就可以将每两个位置都交换一遍，具体过程见题解1。
+
+<br />
+
+## **题解:**
+
+#### 题解1:
+
+```C++
+class Solution {
+public:
+    std::vector<std::vector<int>> result;
+    int size;
+    std::vector<std::vector<int>> permute(std::vector<int>& nums) {
+        if(nums.empty()) return result;
+        size = nums.size();
+        traceback(nums,0);
+        return result;
+    }
+    void traceback(std::vector<int>& nums,int start){
+        if(start == size)   result.push_back(nums);
+        for(int i = start; i < size; ++i){
+            std::swap(nums[i],nums[start]);
+            traceback(nums,start+1);
+            std::swap(nums[i],nums[start]);
+        }
+    }
+};
+```
+
+<br />
+
+#### 题解2:
+
+```C++
+class Solution {
+public:
+    std::vector<std::vector<int>> result;
+    int size;
+    std::vector<int> path;
+    std::vector<std::vector<int>> permute(std::vector<int>& nums) {
+        if(nums.empty()) return result;
+        size = nums.size();
+        std::vector<int> visited(size,0);
+        traceback(nums,0,visited);
+        return result;
+    }
+    void traceback(std::vector<int>& nums,int index,std::vector<int> &visited){
+        if(index == size)  result.push_back(path);
+        for(int i = 0; i < size; ++i){
+            if(visited[i] == 0) {
+                visited[i] = 1;
+                path.push_back(nums[i]);
+                traceback(nums,index +1,visited);
+                visited[i] = 0;
+                path.pop_back();
+            }
+        }
+    }
+};
+```
+
+<br />
+
+## **不足:**
+
+觉得还是需要加强逻辑思维，对于数学性的方法，总是会想的乱七八糟，需要多做题，多锻炼。
+
