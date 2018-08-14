@@ -1,0 +1,131 @@
+---
+layout: post
+title: "LeetCode 40.Combination Sum II"
+description: "LeetCode第四十题"
+tag: [LeetCode 题解]
+---
+
+<br />
+
+**LeetCode 40.组合总和 II**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/combination-sum-ii/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 数组 &nbsp; 回溯法 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp; 给定一个数组<b style="color:firebrick"> candidates </b>和一个目标数<b style="color:firebrick"> target </b>，找出<b style="color:firebrick"> candidates </b>中所有可以使数字和为<b style="color:firebrick"> target </b>的组合。
+
+##### &nbsp;&nbsp;&nbsp; <b style="color:firebrick"> candidates </b>中的每个数字在每个组合中只能使用一次。
+
+##### &nbsp;&nbsp;&nbsp; 说明：
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 所有数字（包括目标数）都是正整数。
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 解集不能包含重复的组合。 
+
+<br />
+
+## **示例:**
+
+#### 示例1:
+
+>输入: candidates = [10,1,2,7,6,1,5], target = 8,
+
+>所求解集为:
+
+>[
+ 
+>&nbsp;&nbsp; [1, 7],
+ 
+>&nbsp;&nbsp; [1, 2, 5],
+ 
+>&nbsp;&nbsp; [2, 6],
+ 
+>&nbsp;&nbsp; [1, 1, 6]
+
+>]
+
+#### 示例2:
+
+>输入: candidates = [2,5,2,1,2], target = 5,
+
+>所求解集为:
+
+>[
+ 
+>&nbsp;&nbsp; [1,2,2],
+ 
+>&nbsp;&nbsp; [5]
+
+>]
+
+<br />
+
+## **分析:**
+
+这道题与组合之和相似，题目要求数组中的数只能用一次，所以需要改动一些判定条件;
+
+不能重复使用一个数，则在下一次递归中将 i+1 传下去，而不是 i。这样可以避免一个数字在某一组合中复用;
+
+同时，题目要求结果不能有重复的组合。根据观察可以发现，进入for循环中，递归调用总是向后一位数进行尝试，若数组中有多位重复的数，那么在多次循环中，结果会有重复的;
+
+例: 1,1,1,1,2,5,7,10 target=8 ;
+
+当初次进入循环当中可以有一个[1,2,5]，若不对重复的1进行处理，那么之后会遍历第二个1，第二个又与后面的2，5组合，导致组合会出现多个重复的。
+
+于是可以想到，第一个1已经把带有1的组合尝试过了，也就是说在for循环第二次遍历即 i > index时，可以不用进行了，可以用 if(i > index && can[i] == can[i-1]){continue;} 跳过重复的数字;
+
+记住，一定是for循环中继续向后遍历(++i操作)，而不是递归继续。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    int size;
+    std::vector<int> path;
+    std::vector<std::vector<int>> result;
+    std::vector<std::vector<int>> combinationSum2(std::vector<int>& candidates, int target) {
+        std::vector<int> path;
+        std::sort(candidates.begin(),candidates.end());
+        size = candidates.size();
+        traceback(candidates,target,0);
+        return result;
+    }
+    void traceback(const std::vector<int>& can,int s,int index){
+        if(s <0 ) return;
+        if(s == 0){
+            result.push_back(path);
+            return;
+        }
+        for(int i = index; i < size; ++i){
+            if(i > index && can[i] == can[i-1]){continue;}
+            path.push_back(can[i]);
+            traceback(can,s-can[i],i+1);
+            path.pop_back();
+        }
+    }
+};
+```
+
+<br />
+
+## **不足:**
+
+这道题看了一下运行的时间，时间惨不忍睹，之后进行调试，提交多次;
+
+以后要记住这些，如果是不变的量，尽量在public中定义一个变量接受这个值，防止此数值一直在递归中传递，消耗大量时间;
+
+能定义在public中就在public中定义，不方便再考虑引用;
+
+对于系统的时间判定，很迷，一个程序，跑出来的时间大不一样，40ms->24ms->20ms->8ms，所以之后如果对运行时间不满意，可以多提交几次。
