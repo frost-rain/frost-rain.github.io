@@ -1,0 +1,105 @@
+---
+layout: post
+title: "LeetCode 47.Permutations II"
+description: "LeetCode第四十七题"
+tag: [LeetCode 题解]
+---
+
+<br />
+
+**LeetCode 47.全排列 II**
+---
+---
+<p style="text-align:right;font-size:120%">
+<a href="https://leetcode-cn.com/problems/permutations-ii/description/" target="blank">
+原题链接点这
+</a>
+</p>
+
+## **题目:**
+
+##### <b style=";color:Indigo">&nbsp;&nbsp;&nbsp; 类型: &nbsp; 回溯算法 </b>
+
+<br />
+
+##### &nbsp;&nbsp;&nbsp;给定一个可包含重复数字的序列，返回所有不重复的全排列。
+
+<br />
+
+## **示例:**
+
+>输入: [1,1,2]
+
+>输出:
+
+>[
+ 
+>&nbsp;&nbsp; [1,1,2],
+ 
+>&nbsp;&nbsp; [1,2,1],
+ 
+>&nbsp;&nbsp; [2,1,1]
+
+>]
+
+<br />
+
+## **分析:**
+
+这道题是全排列的升级版，和全排列类似，但是因为有重复的数字，判断条件复杂了一些;
+
+题目要求组合不能有重复的数字，所以定义一个visited数组，记录nums的被访问情况，防止在递归当中数字的复用;
+
+解题关键在于如何去除重复的组合，经过观察，可以发现，当重复的数字已经使用过一回时，它已经将有此数字的组合遍历了一遍，所以可以在for循环中跳过此重复数字（注意，必须得此数字已使用才可跳过），一个自认为可靠的例子可见<a href="/2018/08/LeetCode-40.Combination-Sum-II/" target="blank"> 组合之和II </a>。
+
+<br />
+
+## **题解:**
+
+```C++
+class Solution {
+public:
+    std::vector<std::vector<int>> result;
+    std::vector<int> path;
+    int size;
+    std::vector<std::vector<int>> permuteUnique(std::vector<int>& nums) {
+        if(nums.empty()) return result;
+        std::sort(nums.begin(),nums.end());
+        size = nums.size();
+        std::vector<int> visited(size,0);
+        traceback(nums,0,visited);
+        return result;
+    }
+    void traceback(const std::vector<int>& nums,int index,std::vector<int> &visited){
+        if(index == size) result.push_back(path);
+        for(int i = 0; i < size; ++i){
+            if(visited[i] == 0){
+                if(i > 0 && visited[i-1] == 0 && nums[i] == nums[i-1]) {continue;}
+                visited[i] = 1;
+                path.push_back(nums[i]);
+                traceback(nums,index+1,visited);
+                path.pop_back();
+                visited[i] = 0;
+            }
+
+        }
+    }
+};
+```
+
+<br />
+
+## **不足:**
+
+没有注意数组越界的问题，没有return result;
+
+如果定义了多个数组，一定要仔细理清数组是否会越界。写代码的过程一定要仔细，不要总是犯些低级错误。
+
+
+
+
+
+
+
+
+
